@@ -1,0 +1,40 @@
+﻿<Window x:Class="Fen.DllCopy.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Fenergo Pdb and Dll Copy Tool" Height="600" Width="450" Closing="OnClosing" >
+    <StackPanel>
+        <DockPanel HorizontalAlignment="Stretch">
+            <TextBlock Margin="5" Text="From: " Width="35" VerticalAlignment="Center"/>
+            <Button Margin="5" Name="BrowseFrom" Click="BrowseFromClick" DockPanel.Dock="Right" Content="Browse" />
+            <ComboBox SelectedIndex="{Binding SelectedDirFrom, Mode=TwoWay}" Margin="5" Name="DirFrom"  SelectionChanged="FromChanged" />
+        </DockPanel>
+        <DockPanel HorizontalAlignment="Stretch">
+            <TextBlock Margin="5" Text="To: " Width="35" VerticalAlignment="Center"/>
+            <Button Margin="5" Name="BrowseTo" Click="BrowseToClick" DockPanel.Dock="Right" Content="Browse"></Button>
+            <ComboBox SelectedIndex="{Binding SelectedDirTo, Mode=TwoWay}" Margin="5" Name="DirTo" />
+        </DockPanel>
+        <ListBox Name="ModulesList" Margin="5" Height="300" >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <CheckBox IsChecked="{Binding Checked, Mode=TwoWay}" Content="{Binding ProjectName}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <DockPanel>
+            <TextBlock Text="Filter:" VerticalAlignment="Center" Margin="5"></TextBlock>
+            <Button Click="DeselectClick" Margin="5" Content="Deselect All" DockPanel.Dock="Right"></Button>
+            <Button Click="SelectAllClick"  Margin="5" Content="Select All" DockPanel.Dock="Right"></Button>
+            <TextBox Margin="5" Name="FilterBox" TextChanged="FilterChange"></TextBox>
+        </DockPanel>
+        <Button Content="Copy" Click="CopyClick"></Button>
+        <ListView Name="Output" Height="100" Margin="5"></ListView>
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem HorizontalContentAlignment="Stretch">
+                <ProgressBar x:Name="Progress" Height="15" />
+            </StatusBarItem>
+        </StatusBar>
+    </StackPanel>
+</Window>
